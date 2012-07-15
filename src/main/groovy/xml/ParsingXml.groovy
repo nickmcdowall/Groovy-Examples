@@ -1,5 +1,8 @@
     def xml = '''
     <shops>
+        <header id='123'>
+            <date>2012-07-15</date>
+        </header>
         <shop name='Algos' location='London'>
             <stock>
                 <apples>4000</apples>
@@ -23,31 +26,52 @@
 
 def shops = new XmlSlurper().parseText(xml)
 
+// Extracting values is simple
+assert "2012-07-15" == shops.header.date.text()
+
+// Accessing an attribute value using @ symbol
+assert '123' == shops.header.@id.text()
 
 
-// Find first match
-assert 1 == shops.shop.find {it.@location == 'Rye' }.size()
+/** Throwing in closures and iterator methods such as find **/
 
-// Find all matches
-assert 2 == shops.shop.findAll { it.@location == 'Rye' }.size()
+// Simple closure that checks for a location attribute value of 'Rye'
+def basedInRye = {node -> node.@location == 'Rye' }
+def findShopsInRye = {node -> node.breadthFirst().grep(basedInRye)}
+def apples = {node -> node.name() == "apples"}
+def findApples = { node -> node.breadthFirst().grep(apples) }
+def oranges = {node -> node.name() == 'oranges'}
+def findOranges = {node -> node.breadthFirst().findAll(oranges)}
+def integerValue = {it.toInteger()}
+def textValue = {it.text()}
+
+
+// Find will only return first match
+assert 1 == shops.shop.find(basedInRye).size()
+
+// Find all will return all matches
+assert 2 == shops.shop.findAll(basedInRye).size()
 
 // Total count of all apples
-assert 4337 ==  shops.shop.stock.apples.collect{it.toInteger()}.sum()
+assert 4337 ==  shops.shop.stock.apples*.toInteger().sum()
 
 // Another way to count the number of apples 
-assert 4337 == shops.'**'.grep {it.name() == "apples"}.sum{it.toInteger()}
+assert 4337 == findApples(shops).sum(integerValue)
 
-// Count the number of apples in Rye
-assert 337 == shops.shop.findAll { it.@location == 'Rye' }.collect{it.stock.apples.toInteger()}.sum()
+// Count the number of apples in Rye using findAll
+assert 337 == shops.shop.findAll(basedInRye).collect{it.stock.apples}.sum(integerValue)
 
-// Count the number of apples in Rye
-assert 337 == shops.shop.grep { it.@location == 'Rye' }.stock.apples.sum{it.toInteger()}
+// Count the number of apples in Rye using grep
+assert 337 == shops.shop.grep(basedInRye).stock.apples.sum(integerValue)
+assert 337 == findShopsInRye(shops).stock.apples.sum(integerValue)
 
 // Get unique locations
-assert ['London', 'Rye'] == shops.shop.@location.collect{it.text()}.unique()
+assert ['London', 'Rye'] == shops.shop.@location.collect(textValue).unique()
+
+// Same as above with 'spread-dot' operator
+assert ['London', 'Rye'] == shops.shop.@location*.text().unique()
 
 // Find all the names of shops that sell oranges
-assert ['Cando'] == shops.shop.findAll{ it.'**'.findAll{it.name() == 'oranges'} }.collect{it.@name.text()}
-
+assert ['Cando'] == findOranges(shops).collect {it.parent().parent().@name.text()}
 
 
