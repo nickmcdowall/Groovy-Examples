@@ -28,9 +28,9 @@ xml.people{
 
 print writer
 
-/**
+/** The output will look something like this:
 <people>
-  <header date='Sun Jul 15 14:46:36 BST 2012' />
+  <header date='Sun Jul 15 14:52:29 BST 2012' />
   <person>
     <name>Nick</name>
     <age>29</age>
@@ -42,7 +42,7 @@ print writer
   </person>
   <person>
     <name middle='Jim' last='Brazer'>Bob</name>
-    <age year='1983'>45</age>
+    <age year='1967'>45</age>
   </person>
 </people>
 **/
