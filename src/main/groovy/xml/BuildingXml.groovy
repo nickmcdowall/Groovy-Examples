@@ -1,13 +1,16 @@
 
-import groovy.xml.MarkupBuilder
 import static java.util.Calendar.YEAR
+import java.awt.Desktop
+import groovy.xml.MarkupBuilder
 
+def desktop = Desktop.getDesktop()
+
+def xmlFile = new File("XmlMadeByGroovy.xml")
+def xmlFileWriter = new FileWriter(xmlFile)
+def xmlBuilder = new MarkupBuilder(xmlFileWriter)
 def today = new Date()
 
-def writer = new StringWriter()
-def xml = new MarkupBuilder(writer)
-
-xml.people{
+xmlBuilder.people{
     header(date: today)
     person{
         name"Nick"
@@ -20,32 +23,46 @@ xml.people{
     }
     person{
         name("Bob", middle:'Jim', last:'Brazer')
-        def yearOfBirth = 1967
-        def age = today[YEAR] - today.updated(year:yearOfBirth)[YEAR]
-        xml.age(year:yearOfBirth, age)
     }
 }
 
-print writer
+println xmlFile.getText()
 
-/** The output will look something like this:
-<people>
-  <header date='Sun Jul 15 14:52:29 BST 2012' />
-  <person>
-    <name>Nick</name>
-    <age>29</age>
-    <address>
-      <town>Ashford</town>
-      <county>Kent</county>
-      <country>England</country>
-    </address>
-  </person>
-  <person>
-    <name middle='Jim' last='Brazer'>Bob</name>
-    <age year='1967'>45</age>
-  </person>
-</people>
+/** If using Java 6 or later this should open browser - if JVM allows it. **/
+desktop.browse(xmlFile.toURI())
+
+
+/** 
+ * Building some HTML 
 **/
 
+def htmlFile = new File("HtmlMadeByGroovy.html")
+def htmlFileWriter = new FileWriter(htmlFile)
+def htmlBuilder = new MarkupBuilder(htmlFileWriter)
 
+htmlBuilder.html{
+	header{
+		h1"Welcome"
+	}
+	body{
+		p"Hello World, doesn't Groovy rock!?"
+		em{
+			p"By the way today is ${ today.format("EEEE") }!"
+		}
+		table{
+			tr(bgcolor:'silver'){
+				th"Language"
+				th"Comments"
+			}
+			tr{
+				td{
+					a(href:"http://groovy.codehaus.org/", "Groovy")
+				}
+				td"Awesome"
+			}
+		}
+	}
+}
 
+println htmlFile.getText()
+desktop.browse(htmlFile.toURI())

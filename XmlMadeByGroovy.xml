@@ -1,0 +1,15 @@
+<people>
+  <header date='Tue Jul 17 22:16:12 BST 2012' />
+  <person>
+    <name>Nick</name>
+    <age>29</age>
+    <address>
+      <town>Ashford</town>
+      <county>Kent</county>
+      <country>England</country>
+    </address>
+  </person>
+  <person>
+    <name middle='Jim' last='Brazer'>Bob</name>
+  </person>
+</people>
