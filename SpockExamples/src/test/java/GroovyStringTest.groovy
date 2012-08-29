@@ -7,40 +7,40 @@ class GroovyStringTest extends Specification {
 
 	def "should reverse the characters correctly on a string"() {
 		given:
-			myString = "nick"
+		    myString = "nick"
 		when:
-			def reverseName = myString.reverse()
+		    def reverseName = myString.reverse()
 		then:
-			reverseName == "kcin"
+		    reverseName == "kcin"
 	}
 
 	def "should convert all characters to Uppercase"(){
 		given:
-			myString = "abc"
+		    myString = "abc"
 		expect:
-			myString.toUpperCase() == "ABC"
+		    myString.toUpperCase() == "ABC"
 	}
 
 	def "should calculate the string size based on the number of characters"() {
 		expect:
-			input.size() == length
+		    input.size() == length
 		where:
-			input			| length
-			"Predators"		| 9
-			"Terminators"	| 11
-			" "				| 1
+		    input           | length
+		    "Predators"     | 9
+		    "Terminators"   | 11
+		    " "             | 1
 	}
 
 	def "should be able to determine whether the string is a number"(){
 		expect:
-			input.isNumber() == aNumber
+		    input.isNumber() == aNumber
 		where:
-			input	| aNumber
-			"15"	| true
-			"a1"	| false
-			"1a"	| false
-			"aa"	| false
-			""		| false
+		    input   | aNumber
+		    "15"    | true
+		    "a1"    | false
+		    "1a"    | false
+		    "aa"    | false
+		    ""      | false
 	}
 }
 
