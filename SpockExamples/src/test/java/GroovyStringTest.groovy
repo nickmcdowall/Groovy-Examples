@@ -4,7 +4,7 @@ class GroovyStringTest extends Specification {
 
 	String myString
 
-	
+
 	def "should reverse the characters correctly on a string"() {
 		given:
 			myString = "nick"
@@ -13,7 +13,7 @@ class GroovyStringTest extends Specification {
 		then:
 			reverseName == "kcin"
 	}
-	
+
 	def "should convert all characters to Uppercase"(){
 		given:
 			myString = "abc"
@@ -25,12 +25,12 @@ class GroovyStringTest extends Specification {
 		expect:
 			input.size() == length
 		where:
-				input    	  	| length
-				"Predators"   	| 9
-				"Terminators" 	| 11
-				" "				| 1
+			input			| length
+			"Predators"		| 9
+			"Terminators"	| 11
+			" "				| 1
 	}
-	
+
 	def "should be able to determine whether the string is a number"(){
 		expect:
 			input.isNumber() == aNumber
