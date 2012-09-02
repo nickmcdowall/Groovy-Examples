@@ -3,7 +3,7 @@ package interactions;
 import groovy.sql.Sql
 import spock.lang.Specification;
 
-class InteractionsTest extends Specification{
+class InteractionsTest extends Specification {
 
 	Sql sql = Mock(Sql)
 
