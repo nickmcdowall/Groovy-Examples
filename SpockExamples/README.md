@@ -19,8 +19,9 @@ The feature (test) methods can have the following blocks:
 
 * <code>expect:</code>
  * can be used to combine when and then in one statement
-* <code>cleanup:</code
- * TODO
  
-* <code>where:</code
- * TODO
+* <code>cleanup:</code>
+ * cleanup after the test
+ 
+* <code>where:</code>
+ * provide parameters for the test
