@@ -32,6 +32,6 @@ class GroovyParameterisedTest extends Specification {
 		    "a1"          | false
 		    "1a"          | false
 		    "aa"          | false
-			""            | false
+		    ""            | false
 	}
 }
