@@ -21,26 +21,5 @@ class GroovyStringTest extends Specification {
 		    myString.toUpperCase() == "ABC"
 	}
 
-	def "should calculate the string size based on the number of characters"() {
-		expect:
-		    input.size() == length
-		where:
-		    input           | length
-		    "Predators"     | 9
-		    "Terminators"   | 11
-		    " "             | 1
-	}
-
-	def "should be able to determine whether the string is a number"(){
-		expect:
-		    input.isNumber() == aNumber
-		where:
-		    input   | aNumber
-		    "15"    | true
-		    "a1"    | false
-		    "1a"    | false
-		    "aa"    | false
-		    ""      | false
-	}
 }
 
