@@ -18,7 +18,7 @@ public class JavaTheoryTest {
 	 * All combinations of the data points will be applied to prove the theory.
 	 */
 	@Theory
-	public void inTheoryAlphabeticStringsAreGreaterThanNumericStrings(String alphabeticString, Integer integer) {
+	public void inTheoryAlphabeticStringsAreLexicographicallyGreaterThanNumericStrings(String alphabeticString, Integer integer) {
 		assertThat(alphabeticString, greaterThan(integer.toString()));	
 	}
  

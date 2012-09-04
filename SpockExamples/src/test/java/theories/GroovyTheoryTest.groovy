@@ -12,7 +12,7 @@ import spock.lang.Specification;
  */
 class GroovyTheoryTest extends Specification {
 	
-	def "In theory alphabetic strings are larger than numeric strings"() {
+	def "In theory alphabetic characters (by extension strings) are lexicographically larger than numeric strings i.e. 'a' > '1' "() {
 		expect:
 			givenString > givenInteger.toString()
 		where:
