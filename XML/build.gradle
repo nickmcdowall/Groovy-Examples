@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+
+jar {
+    manifest {
+        attributes 'Title': 'Groovy Xml Examples', 'Version': '1.0'
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.0.5'
+
+	testCompile 'junit:junit:4.+'
+	testCompile 'org.mockito:mockito-all:1.8.4'
+
+}

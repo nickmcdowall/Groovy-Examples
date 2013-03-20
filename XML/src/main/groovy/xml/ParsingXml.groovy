@@ -55,7 +55,7 @@ assert 2 == shops.shop.findAll(basedInRye).size()
 // Total count of all apples
 assert 4337 ==  shops.shop.stock.apples*.toInteger().sum()
 
-// Another way to count the number of apples 
+// Another way to count the number of apples
 assert 4337 == findApples(shops).sum(integerValue)
 
 // Count the number of apples in Rye using findAll
@@ -74,4 +74,4 @@ assert ['London', 'Rye'] == shops.shop.@location*.text().unique()
 // Find all the names of shops that sell oranges
 assert ['Cando'] == findOranges(shops).collect {it.parent().parent().@name.text()}
 
-
+println "All asserts successful :-)"
