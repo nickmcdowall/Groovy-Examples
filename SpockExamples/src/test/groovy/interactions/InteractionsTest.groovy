@@ -8,7 +8,7 @@ import spock.lang.Specification;
  * No need to record/replay the mocks
  * Mocked objects will return default values when no return value is enforced (e.g. false, 0, null).
  * You can verify the order of mock calls by using multiple 'then' blocks
- * You can use the wild card '_' for methods or arguments or even mock objects.  
+ * You can use the wild card '_' for methods or arguments or even mock objects.
  *
  */
 class InteractionsTest extends Specification {
@@ -20,10 +20,10 @@ class InteractionsTest extends Specification {
 			List result = sql.rows("select * from TABLE")
 		then:
 			sql.rows("select * from TABLE") >> ["A mock result"]
-		and: 
+		and:
 			result == ["A mock result"]
 	}
-	
+
 	def "You can specify multiple return values using '>>>'"(){
 		when:
 			def resultA = sql.rows "a query"
@@ -44,9 +44,9 @@ class InteractionsTest extends Specification {
 		then: 1 * sql.rows("query") >> ["mocked result"]
 		then: mockedResult == ["mocked result"]
 	}
-	
+
 	def "You can verify the number of calls and the order by using multiple 'then' blocks"(){
-		when: 
+		when:
 			sql.rows "call 1"
 			sql.rows "call 2"
 			sql.close()
@@ -57,7 +57,7 @@ class InteractionsTest extends Specification {
 	}
 
 	def "You can specify upper and lower bounds on the calls by using ranges"(){
-		when: 
+		when:
 			sql.close()
 		then:
 			(0..5) * sql.rows(_)
@@ -66,17 +66,17 @@ class InteractionsTest extends Specification {
 		then: "make sure no more calls after closed() is called"
 			0 * sql._
 	}
-	
+
 	def "You can force an exception to be thrown and then also verify that exceptions were thrown or not thrown"(){
-		when: 
+		when:
 			sql.rows("a query")
-		then: 
+		then:
 			sql.rows("a query") >> { throw new IllegalStateException() }
 		and:
 			thrown(IllegalStateException)
-		and: 
+		and:
 			notThrown(IllegalArgumentException)
 	}
-	
-	
+
+
 }
